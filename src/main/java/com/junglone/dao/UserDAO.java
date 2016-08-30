@@ -1,7 +1,6 @@
 package com.junglone.dao;
 
 import com.junglone.domain.User;
-import com.junglone.service.UserService;
 
 import java.util.List;
 import java.util.Map;
@@ -19,6 +18,6 @@ public interface UserDAO {
 
     void updateUser(User user);
 
-    List<UserService> selectUserList(Map<String, Object> mapCondition);
+    List<User> selectUserList(Map<String, Object> mapCondition);
 
 }

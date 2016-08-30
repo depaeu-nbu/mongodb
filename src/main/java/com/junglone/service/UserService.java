@@ -17,6 +17,6 @@ public interface UserService {
 
     void updateUser(User user);
 
-    List<UserService> selectUserList(Map<String, Object> mapCondition);
+    List<User> selectUserList(Map<String, Object> mapCondition);
 
 }

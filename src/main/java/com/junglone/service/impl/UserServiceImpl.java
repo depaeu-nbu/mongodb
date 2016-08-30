@@ -36,7 +36,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<UserService> selectUserList(Map<String, Object> mapCondition) {
+    public List<User> selectUserList(Map<String, Object> mapCondition) {
         return userDAO.selectUserList(mapCondition);
     }
 }

@@ -7,7 +7,7 @@
        xsi:schemaLocation="http://www.springframework.org/schema/context
           http://www.springframework.org/schema/context/spring-context-3.0.xsd
           http://www.springframework.org/schema/data/mongo
-          http://www.springframework.org/schema/data/mongo/spring-mongo-1.0.xsd
+          http://www.springframework.org/schema/data/mongo/spring-mongo.xsd
           http://www.springframework.org/schema/beans
           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
           http://www.springframework.org/schema/aop
@@ -19,7 +19,7 @@
     <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="locations">
             <list>
-                <value>classpath:/property/db.properties</value>
+                <value>classpath:/property/mongodb.properties</value>
             </list>
         </property>
     </bean>
@@ -27,21 +27,55 @@
     <!-- Default bean name is 'mongo' -->
     <!--<mongo:mongo host="${mongo.host}" port="${mongo.port}"/>-->
 
-    <mongo:mongo host="${mongo.host}" port="${mongo.port}">
-        <mongo:options connections-per-host="8"
+    <mongo:mongo-client host="${mongo.host}" port="${mongo.port}">
+        <mongo:client-options connections-per-host="8"
                        threads-allowed-to-block-for-connection-multiplier="4"
                        connect-timeout="1000"
                        max-wait-time="1500"
-                       auto-connect-retry="true"
                        socket-keep-alive="true"
-                       socket-timeout="1500"
-                       slave-ok="true"
-                       write-number="1"
-                       write-timeout="0"
-                       write-fsync="true"/>
-    </mongo:mongo>
+                       socket-timeout="1500"/>
+    </mongo:mongo-client>
+
+    <!--connectionsPerHost：每个主机的连接数-->
+    <!--threadsAllowedToBlockForConnectionMultiplier：线程队列数，它以上面connectionsPerHost值相乘的结果就是线程队列最大值。如果连接线程排满了队列就会抛出“Out of semaphores to get db”错误。-->
+    <!--maxWaitTime:最大等待连接的线程阻塞时间-->
+    <!--connectTimeout：连接超时的毫秒。0是默认和无限-->
+    <!--socketTimeout：socket超时。0是默认和无限-->
+    <!--autoConnectRetry：这个控制是否在一个连接时，系统会自动重试-->
 
     <!--<mongo:mongo id="replicaSetMongo" replica-set="127.0.0.1:27017,localhost:27018"/>-->
+
+    <!--<mongo:db-factory dbname="test_mongo"/>-->
+
+    <!--<mongo:db-factory id="anotherMongoDbFactory"-->
+                      <!--host="${mongo.host}"-->
+                      <!--port="${mongo.port}"-->
+                      <!--dbname="test_mongo"/>-->
+
+    <!--<context:property-placeholder location="classpath:/property/mongodb.properties"/>-->
+
+    <!--<mongo:mongo host="${mongo.host}" port="${mongo.port}">-->
+        <!--<mongo:options-->
+                <!--connections-per-host="${mongo.connectionsPerHost}"-->
+                <!--threads-allowed-to-block-for-connection-multiplier="${mongo.threadsAllowedToBlockForConnectionMultiplier}"-->
+                <!--connect-timeout="${mongo.connectTimeout}"-->
+                <!--max-wait-time="${mongo.maxWaitTime}"-->
+                <!--auto-connect-retry="${mongo.autoConnectRetry}"-->
+                <!--socket-keep-alive="${mongo.socketKeepAlive}"-->
+                <!--socket-timeout="${mongo.socketTimeout}"-->
+                <!--slave-ok="${mongo.slaveOk}"-->
+                <!--write-number="1"-->
+                <!--write-timeout="0"-->
+                <!--write-fsync="true"/>-->
+    <!--</mongo:mongo>-->
+
+    <!--<mongo:db-factory dbname="test_mongo" mongo-ref="mongo"/>-->
+
+    <bean id="anotherMongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
+        <!--<constructor-arg name="mongoDbFactory" ref="mongoDbFactory"/>-->
+        <constructor-arg ref="mongo"/>
+        <constructor-arg name="databaseName" value="test_mongo"/>
+    </bean>
 
     <!--启用注解配置-->
     <context:annotation-config/>
@@ -52,6 +86,5 @@
     <!-- 自动装配 -->
     <bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor"/>
     <!--<import resource="spring_javamail.xml"/>-->
-    <import resource="spring_slave_db.xml"/>
 
 </beans>

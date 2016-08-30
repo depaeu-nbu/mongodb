@@ -1,5 +1,7 @@
 package com.junglone.domain;
 
+import com.alibaba.fastjson.JSON;
+
 import java.util.Date;
 
 /**
