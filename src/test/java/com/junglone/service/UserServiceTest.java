@@ -37,15 +37,15 @@ public class UserServiceTest extends BaseTest {
         userService.deleteUser(user);
     }
 
-
+    @Test
     public void updateUser() throws Exception {
         User user = new User();
-        user.setName("Hello");
-        user.setId(100002);
+        user.setName("Junglone");
+        user.setId(10000111);
         userService.updateUser(user);
     }
 
-    @Test
+
     public void selectUserList() throws Exception {
         Map<String, Object> mapCondition = new HashMap<>();
         mapCondition.put("strCollectionName", "User");

@@ -2,6 +2,9 @@ package com.junglone.dao.impl;
 
 import com.junglone.dao.UserDAO;
 import com.junglone.domain.User;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -30,7 +33,17 @@ public class UserDAOImpl extends BaseMongoDAO implements UserDAO {
 
     @Override
     public void updateUser(User user) {
-        updateMulti(query(where("strName").is("Junglone")), update("nId", user.getId()), user.getClass().getSimpleName());
+        Criteria criteria = new Criteria();
+        criteria.where("strName").is("Hello");
+
+        Query query = new Query();
+        query.addCriteria(criteria);
+
+        Update update = new Update();
+        update.set("nId", user.getId());
+        update.set("strName", user.getName());
+
+        updateFirst(query, update, user.getClass().getSimpleName());
     }
 
     @Override
