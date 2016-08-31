@@ -19,4 +19,8 @@ public interface UserService {
 
     List<User> selectUserList(Map<String, Object> mapCondition);
 
+    User selectUserById(long lId);
+
+    User selectUser(String strUserName, String strPassword);
+
 }

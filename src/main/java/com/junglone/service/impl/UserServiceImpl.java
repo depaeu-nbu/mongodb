@@ -1,11 +1,13 @@
 package com.junglone.service.impl;
 
+import com.junglone.common.util.MD5Util;
 import com.junglone.dao.UserDAO;
 import com.junglone.domain.User;
 import com.junglone.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -22,6 +24,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void addUser(User user) {
+        user.setId(System.nanoTime());
+        user.setPassword(MD5Util.md5(user.getPassword()));
+        user.setCreateTime(new Date());
         userDAO.addUser(user);
     }
 
@@ -38,5 +43,15 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<User> selectUserList(Map<String, Object> mapCondition) {
         return userDAO.selectUserList(mapCondition);
+    }
+
+    @Override
+    public User selectUserById(long lId) {
+        return userDAO.selectUserById(lId);
+    }
+
+    @Override
+    public User selectUser(String strUserName, String strPassword) {
+        return userDAO.selectUser(strUserName, strPassword);
     }
 }

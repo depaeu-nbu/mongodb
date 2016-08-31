@@ -1,7 +1,7 @@
 package com.junglone.service;
 
 import com.alibaba.fastjson.JSON;
-import com.junglone.common.LogDefault;
+import com.junglone.common.log.LogDefault;
 import org.apache.log4j.Logger;
 import org.junit.After;
 import org.junit.Before;
@@ -22,7 +22,7 @@ public class BaseTest {
     }
 
     protected void print(Object obj) {
-        logger.info(JSON.toJSONString(obj));
+        logger.info(JSON.toJSONStringWithDateFormat(obj, "yyyy-MM-dd HH:mm:ss"));
     }
 
     @Before

@@ -1,9 +1,9 @@
 package com.junglone.service;
 
+import com.junglone.common.util.MD5Util;
 import com.junglone.domain.User;
 import org.junit.Test;
 
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,11 +19,11 @@ public class UserServiceTest extends BaseTest {
 
     public void addUser() throws Exception {
         User user = new User();
-        user.setId(1000000);
+        user.setUserName("hello");
+        user.setPassword("hello");
         user.setName("Junglone");
         user.setSex(1);
         user.setMobile("13164256506");
-        user.setCreateTime(new Date());
 
         print(user);
         userService.addUser(user);
@@ -33,15 +33,16 @@ public class UserServiceTest extends BaseTest {
 
     public void deleteUser() throws Exception {
         User user = new User();
-        user.setName("Junglone");
+        user.setId(569258800320852L);
         userService.deleteUser(user);
     }
 
-    @Test
+
     public void updateUser() throws Exception {
         User user = new User();
-        user.setName("Junglone");
-        user.setId(10000111);
+        user.setId(569739143668294L);
+        user.setName("Hello");
+        user.setMobile("abcdefg");
         userService.updateUser(user);
     }
 
@@ -55,6 +56,21 @@ public class UserServiceTest extends BaseTest {
         print(list);
 
         list.forEach(this::print);
+    }
+
+
+    public void selectUserById() {
+        long lId = 571991755907992L;
+        User user = userService.selectUserById(lId);
+        print(user);
+    }
+
+    @Test
+    public void selectUser() {
+        String strUserName = "hello";
+        String strPassword = MD5Util.md5("hello");
+        User user = userService.selectUser(strUserName, strPassword);
+        print(user);
     }
 
 }

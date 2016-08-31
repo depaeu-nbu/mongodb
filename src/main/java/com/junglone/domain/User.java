@@ -1,7 +1,5 @@
 package com.junglone.domain;
 
-import com.alibaba.fastjson.JSON;
-
 import java.util.Date;
 
 /**
@@ -10,11 +8,15 @@ import java.util.Date;
  */
 public class User {
 
-    private long nId;
+    private long lId;
+
+    private String strUserName;
+
+    private String strPassword;
 
     private String strName;
 
-    private int nSex;
+    private int nSex = -1;
 
     private String strMobile;
 
@@ -22,11 +24,11 @@ public class User {
 
 
     public long getId() {
-        return nId;
+        return lId;
     }
 
     public void setId(long nId) {
-        this.nId = nId;
+        this.lId = nId;
     }
 
     public String getName() {
@@ -59,5 +61,21 @@ public class User {
 
     public void setCreateTime(Date dtCreateTime) {
         this.dtCreateTime = dtCreateTime;
+    }
+
+    public String getUserName() {
+        return strUserName;
+    }
+
+    public void setUserName(String strUserName) {
+        this.strUserName = strUserName;
+    }
+
+    public String getPassword() {
+        return strPassword;
+    }
+
+    public void setPassword(String strPassword) {
+        this.strPassword = strPassword;
     }
 }

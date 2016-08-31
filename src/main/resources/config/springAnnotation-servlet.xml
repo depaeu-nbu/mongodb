@@ -25,14 +25,6 @@
         <property name="suffix" value=".jsp" />
     </bean>
 
-    <!--拦截直接访问页面的请求-->
-    <mvc:interceptors>
-        <mvc:interceptor>
-            <mvc:mapping path="/**"/>
-            <bean class="com.peanutcar.interceptor.BaseService"></bean>
-        </mvc:interceptor>
-    </mvc:interceptors>
-
     <!--<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">-->
         <!--&lt;!&ndash;限制大小2M&ndash;&gt;-->
         <!--<property name="maxUploadSize" value="2048000"/>-->
@@ -40,22 +32,24 @@
         <!--<property name="resolveLazily" value="true"/>-->
     <!--</bean>-->
 
-    <!-- Mvc 拦截器配置 -->
-    <!--<mvc:interceptors>-->
-    <!-- 用户登录状态判断 -->
-    <!--<mvc:interceptor>-->
-    <!--<mvc:mapping path="/**"/>-->
-    <!--<bean class="com.jy.interceptor.LoginStatusInterceptor">-->
-    <!--</bean>-->
-    <!--</mvc:interceptor>-->
+    <!--MVC 拦截器配置-->
+    <mvc:interceptors>
+        <!--拦截直接访问页面的请求-->
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <bean class="com.junglone.interceptor.BaseInterceptor"></bean>
+        </mvc:interceptor>
+        <!--用户登录状态判断-->
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <bean class="com.junglone.interceptor.LoginStatusInterceptor"/>
+        </mvc:interceptor>
 
-    <!-- Cookie超时 -->
-    <!--<mvc:interceptor>-->
-    <!--<mvc:mapping path="/user/**"/>-->
-    <!--<mvc:mapping path="/qianmi/**"/>-->
-    <!--<bean class="com.jy.interceptor.CookieInterceptor">-->
-    <!--</bean>-->
-    <!--</mvc:interceptor>-->
-    <!--</mvc:interceptors>-->
+        <!--Cookie超时-->
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <bean class="com.junglone.interceptor.CookieInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
 
 </beans>
