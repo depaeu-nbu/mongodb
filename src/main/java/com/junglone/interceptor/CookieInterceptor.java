@@ -31,6 +31,11 @@ public class CookieInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object arg2) throws Exception {
         String redirectURL = "/login";//登录地址
         String userId = CookieUtils.getCookie(request, CookieUtils.COOKIE_HISTORYID);//用户名
+        System.out.println("Invoke CookieInterceptor.preHandle userId ==== " + userId);
+        if (request.getRequestURL().toString().contains("login")) {
+            return true;
+        }
+
         if (StringUtil.isBlank(userId)) {
             response.sendRedirect(request.getContextPath() + redirectURL);//重定向至登录页面
             return false;

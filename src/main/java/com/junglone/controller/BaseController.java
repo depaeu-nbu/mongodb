@@ -21,10 +21,14 @@ public class BaseController {
      * @param strPath
      * @return
      */
-    @RequestMapping(value = "/{strPath}")
-    public String forward(@PathVariable("strPath") String strPath) {
-        logger.info("Invoke forward request path ==== " + strPath);
-        return strPath;
+    @RequestMapping(value = "/login")
+    public String login() {
+        return "login";
+    }
+
+    @RequestMapping(value = "register")
+    public String register() {
+        return "register";
     }
 
     protected void printWriter(HttpServletResponse response, Object content) {

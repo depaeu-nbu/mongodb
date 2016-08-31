@@ -40,10 +40,10 @@
             <bean class="com.junglone.interceptor.BaseInterceptor"></bean>
         </mvc:interceptor>
         <!--用户登录状态判断-->
-        <mvc:interceptor>
-            <mvc:mapping path="/**"/>
-            <bean class="com.junglone.interceptor.LoginStatusInterceptor"/>
-        </mvc:interceptor>
+        <!--<mvc:interceptor>-->
+            <!--<mvc:mapping path="/**"/>-->
+            <!--<bean class="com.junglone.interceptor.LoginStatusInterceptor"/>-->
+        <!--</mvc:interceptor>-->
 
         <!--Cookie超时-->
         <mvc:interceptor>

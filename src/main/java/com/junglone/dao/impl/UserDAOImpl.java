@@ -78,7 +78,7 @@ public class UserDAOImpl extends BaseMongoDAO implements UserDAO {
         Criteria criteria = new Criteria();
         Query query = new Query(criteria);
 
-        return find(query, User.class, mapCondition.get("strCollectionName").toString());
+        return find(query, User.class, User.class.getSimpleName());
     }
 
     public User selectUserById(long lId) {

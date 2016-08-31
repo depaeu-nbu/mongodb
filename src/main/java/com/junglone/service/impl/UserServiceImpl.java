@@ -52,6 +52,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User selectUser(String strUserName, String strPassword) {
+        strPassword = MD5Util.md5(strPassword);
         return userDAO.selectUser(strUserName, strPassword);
     }
 }

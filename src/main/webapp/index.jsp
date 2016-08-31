@@ -1,5 +1,7 @@
-<html>
-<body>
-<h2>Hello World!</h2>
-</body>
-</html>
+<%@ page language="java" pageEncoding="UTF-8" %>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<%
+    request.getRequestDispatcher("/login").forward(request, response);
+%>
